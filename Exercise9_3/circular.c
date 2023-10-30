@@ -25,8 +25,8 @@ int CircularDequeue(CircularQueue* q, int* pValue) {
         *pValue = q->items[q->tail];
         q->tail = (q->tail + 1) % QUEUE_SIZE;
         q->itemCount--;
-        return 1; // Dequeue successful
+        return 1;
     } else {
-        return 0; // Queue is empty
+        return 0;
     }
 }
