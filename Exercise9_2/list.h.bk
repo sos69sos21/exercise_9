@@ -1,0 +1,15 @@
+#ifndef LIST_H
+#define LIST_H
+
+#define MAX_WORD_LENGTH 30
+
+typedef struct _listNode {
+    char word[MAX_WORD_LENGTH];
+    struct _listNode* pNext;
+} LinkedListNode;
+
+LinkedListNode* addNode(LinkedListNode* head, const char* newWord);
+void printList(LinkedListNode* head);
+void freeList(LinkedListNode* head);
+
+#endif

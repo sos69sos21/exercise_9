@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "list.h"
+
+//Adds a new node/word to the linked list
+LinkedListNode* addNode(LinkedListNode* headNode, const char* newWord) {
+    LinkedListNode* newNode = (LinkedListNode*)malloc(sizeof(LinkedListNode));
+    if (newNode == NULL) {
+        printf("ERROR: Unable to allocate memory\n");
+        exit(1);
+    }
+    
+    // Add given word into new node
+    strncpy(newNode->word, newWord, MAX_WORD_LENGTH - 1);
+    newNode->word[MAX_WORD_LENGTH - 1] = '\0';
+
+    //Update the next pointer to NULL / end of list.
+    newNode->pNext = NULL;
+
+    // Start of new list. List is already empty.
+    if (headNode == NULL) {
+        return newNode;
+    }
+
+    // Iterate through the list in order to locate the last node in the list.
+    LinkedListNode* currentNode = headNode;
+    while (currentNode->pNext != NULL) {
+        currentNode = currentNode->pNext;
+    }
+
+    // Add out new node / word to the end of the list.
+    currentNode->pNext = newNode;
+
+    return headNode;
+}
+
+// Prints all of the nodes in the list
+void printList(LinkedListNode* head) {
+    LinkedListNode* current = head;
+    while (current != NULL) {
+        printf("%s\n", current->word);
+        current = current->pNext;
+    }
+}
+
+// Frees up memory for the list
+void freeList(LinkedListNode* head) {
+    LinkedListNode* current = head;
+    while (current != NULL) {
+        LinkedListNode* next = current->pNext;
+        free(current);
+        current = next;
+    }
+}
